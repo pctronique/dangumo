@@ -1,0 +1,2 @@
+cd projectAngular 
+npm install

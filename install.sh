@@ -1,6 +1,11 @@
 mkdir -p projecttmp
 mkdir -p projecttmp/logs
+mkdir -p projecttmp/logs/angular
+mkdir -p projecttmp/logs/pm2
 mkdir -p projecttmp/mongo_data
+
+touch projecttmp/logs/angular/ng_out.log
+touch projecttmp/logs/angular/ng_error.log
 
 chmod 777 -R project
 chmod 777 -R projecttmp
@@ -16,7 +21,6 @@ fi
 
 docker-compose up -d
 
-#./bin/ng.sh analytics --global
-#./bin/ng.sh analytics on
-#./bin/ng.sh new projectAngular --routing --defaults --global
-#./bin/ng.sh projectAngular/serve --host 0.0.0.0  >> ../../log/ng_out.log 2>> ../../log/ng_error.log
+./bin/ng.sh new projectAngular --routing --defaults
+#./bin/install_projet.sh
+./bin/start.sh
