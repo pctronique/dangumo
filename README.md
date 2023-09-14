@@ -27,6 +27,7 @@ La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
     <li><a href="#le-dossier-du-projet">Le dossier du projet</a></li>
     <li><a href="#mini-projet-nodejs">Mini projet nodejs</a></li>
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
+    <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
   </ol>
 </details>
     
@@ -93,19 +94,28 @@ Si ce n'est pas déjà fait.
 
 ### Modifier les versions
 Sur le projet actuel, on utilise les nouvelles versions ce qui peut poser des problèmes sur le projet par la suite. Il est préférable d'utiliser la version utilisée lors de la création du projet.
+<br />[docker nodejs](https://hub.docker.com/_/node/)
 <br /><img src="./images/Screenshot_20230914_092538.png" alt="exemple angular server" width="300" height="175"><br />
 ```
 $ ./bin/terminal.sh
 # nodejs -v
+v20.6.1
 # ng version
+Angular CLI: 16.2.2
 ```
 Dand le fichier "**.docker/angular/Dockerfile**", remplacé '**latest**' par la bonne version disponible pour docker :
 ```
 FROM node:latest
 ```
+```
+FROM node:20.6.1
+```
 Dans le même fichier, modifier l'installation angular par la bonne version :
 ```
 RUN npm install -y --no-install-recommends @angular/cli -g
+```
+```
+RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
 ```
 
 ## Rechercher un package (Docker)
@@ -163,3 +173,17 @@ $ ./bin/terminal.sh
 # ng generate component hero-detail
 # ng generate component xyz
 ```
+
+## Visualiser les messages de la console ou les logs
+Vous allez avoir besoin de faire des commandes angular sur votre code, pour ce faire :
+```
+$ ./bin/terminal.sh
+# cd projectAngular/
+# ng generate component hero-detail
+# ng generate component xyz
+```
+
+## Visualiser les messages de la console ou les logs
+Les messages de la console sont transmis dans un fichier et ne sont pas visibles sur le terminal.<br />
+* Message sur la console dans le fichier : "**projecttmp/logs/angular/ng_out.log**".
+* Message d'erreur sur la console dans le fichier : "**projecttmp/logs/angular/ng_error.log**".
