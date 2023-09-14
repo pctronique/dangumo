@@ -175,15 +175,6 @@ $ ./bin/terminal.sh
 ```
 
 ## Visualiser les messages de la console ou les logs
-Vous allez avoir besoin de faire des commandes angular sur votre code, pour ce faire :
-```
-$ ./bin/terminal.sh
-# cd projectAngular/
-# ng generate component hero-detail
-# ng generate component xyz
-```
-
-## Visualiser les messages de la console ou les logs
 Les messages de la console sont transmis dans un fichier et ne sont pas visibles sur le terminal.<br />
 * Message sur la console dans le fichier : "**projecttmp/logs/angular/ng_out.log**".
 * Message d'erreur sur la console dans le fichier : "**projecttmp/logs/angular/ng_error.log**".
