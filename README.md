@@ -135,6 +135,7 @@ Votre code devra être placé dans le dossier "**project**".
 Il y a un mini-projet Nodejs pour vous montrer un exemple, mais vous pouvez le retirer en vidant le dossier "**project**".<br />
 > [!WARNING]
 > Ne surtout pas supprimer le fichier "**.gitignore**" du dossier "**project**".<br />
+
 Lors de l'installation, il démarre le serveur Nodejs du mini-projet sur '**localhost:4200**' si vous n'avez pas modifié le port (sinon il faut modifier le numéro de port du lien) :
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier "**createProject.sh**" :
