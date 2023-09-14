@@ -21,6 +21,6 @@ fi
 
 docker-compose up -d
 
-./bin/ng.sh new projectAngular --routing --defaults
-#./bin/install_projet.sh
-./bin/start.sh
+./createProject.sh
+#./npmInstall.sh
+./start.sh

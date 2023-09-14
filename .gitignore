@@ -4,7 +4,6 @@
 /project/package-lock.json
 /projecttmp/
 /.env
-/project/projectAngular/.vscode/
 /project/projectAngular/node_modules/
 /project/projectAngular/npm-debug.log
 /project/projectAngular/yarn-error.log

@@ -8,8 +8,6 @@ WORKDIR "/home/project"
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN apt install -y --no-install-recommends nodejs
-RUN apt install -y --no-install-recommends npm
 RUN npm install -y --no-install-recommends pm2 -g
 RUN npm install -y --no-install-recommends pm2-logrotate
 RUN npm install -y --no-install-recommends @angular/cli -g

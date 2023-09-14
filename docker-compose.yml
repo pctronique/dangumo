@@ -15,8 +15,6 @@ services:
         depends_on:
             - mongo
         volumes:
-            - ./.docker/config/connection_server.json:/home/project/config/connection_server.json:rw
-            - ./.docker/config/connection_mongo.json:/home/project/config/connection_mongo.json:rw
             - ./project:/home/project:rw
             - ./projecttmp/logs/pm2:/root/.pm2/logs/:rw
             - ./projecttmp/logs/angular:/home/projecttmp/logs/angular:rw
