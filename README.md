@@ -32,10 +32,10 @@ La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
 </details>
     
 ## Installé à la base du projet docker
-* nodeJS
-* pm2
-* angular
-* mongoDB
+* [docker nodeJS](https://hub.docker.com/_/node/)
+* pm2 (docker nodeJS)
+* angular (docker nodeJS)
+* [docker mongoDB](https://hub.docker.com/_/mongo)
 
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 
@@ -117,6 +117,16 @@ RUN npm install -y --no-install-recommends @angular/cli -g
 ```
 RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
 ```
+<br />
+
+> [!NOTE]
+> Il n'est pas possible de choisir une version pour mongoDB, mais ceci ne pose pas de problème.
+
+<br />
+
+> [!WARNING]
+> Il est indispensable de le faire pour pouvoir utiliser un conteneur identique des années plus tard.
+
 
 ## Rechercher un package (Docker)
 Si vous avez besoin d'un package pour votre projet dans le conteneur. Vous pouvez rechercher les packages disponibles pour le conteneur.
