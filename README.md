@@ -85,7 +85,7 @@ Par :
 Si ce n'est pas déjà fait.
 
 ### Modifier les versions
-Sur le projet actuel, on utilise les nouvelles versions ce qui peut poser des problèmes sur le projet par la suite, il est préférable d'utiliser la version utilisée lors de la création du projet.
+Sur le projet actuel, on utilise les nouvelles versions ce qui peut poser des problèmes sur le projet par la suite. Il est préférable d'utiliser la version utilisée lors de la création du projet.
 <br /><img src="./images/Screenshot_20230914_092538.png" alt="exemple angular server" width="300" height="175"><br />
 ```
 $ ./bin/terminal.sh
