@@ -80,15 +80,15 @@ $ ./install.sh
 ### Modifier le fichier d'intallation
 Après l'installation, il faudra modifier le contenu du fichier "**install.sh**" :
 ```
-./createProject.sh
-#./updateProject.sh
-./start.sh
+./bin/createProject.sh
+#./bin/updateProject.sh
+./bin/start.sh
 ```
 Par :
 ```
-#./createProject.sh
-./updateProject.sh
-./start.sh
+#./bin/createProject.sh
+./bin/updateProject.sh
+./bin/start.sh
 ```
 Si ce n'est pas déjà fait.
 
@@ -155,21 +155,21 @@ Il y a un mini-projet angular pour vous montrer un exemple, mais vous pouvez le 
 
 Lors de l'installation, il démarre le serveur angular du mini-projet sur '**localhost:4200**' si vous n'avez pas modifié le port (sinon il faut modifier le numéro de port du lien) :
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
-Vous pouvez modifier le démarrage de votre projet dans le fichier "**createProject.sh**" :
+Vous pouvez modifier le démarrage de votre projet dans le fichier "**bin/createProject.sh**" :
 ```
 docker exec $NAME_NODEJS_CONTAINER bash -c "ng new projectAngular --routing --defaults --skip-git && cp .gitignore projectAngular/"
 ```
-Dans le fichier "**updateProject.sh**" :
+Dans le fichier "**bin/updateProject.sh**" :
 ```
 docker exec $NAME_NODEJS_CONTAINER bash -c "cd projectAngular && npm install"
 ```
-Dans le fichier "**start.sh**" :
+Dans le fichier "**bin/start.sh**" :
 ```
 docker exec $NAME_NODEJS_CONTAINER bash -c "cd projectAngular && ng serve --host 0.0.0.0 >> ../../projecttmp/logs/angular/ng_out.log 2>> ../../projecttmp/logs/angular/ng_error.log" &
 ```
 Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
 ```
-$ ./start.sh
+$ ./bin/start.sh
 ```
 
 ## Les commandes angular dans le mini-projet

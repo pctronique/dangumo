@@ -7,6 +7,15 @@ mkdir -p projecttmp/mongo_data
 touch projecttmp/logs/angular/ng_out.log
 touch projecttmp/logs/angular/ng_error.log
 
+ # creation du fichier .gitignore
+if [ -e project/.gitignore ]
+then
+    echo ""
+else
+    echo ""
+    cp .docker/config/gitignore_angular project/.gitignore
+fi
+
 chmod 777 -R project
 chmod 777 -R projecttmp
 
@@ -21,6 +30,6 @@ fi
 
 docker-compose up -d
 
-./createProject.sh
-#./updateProject.sh
-./start.sh
+./bin/createProject.sh
+#./bin/updateProject.sh
+./bin/start.sh
