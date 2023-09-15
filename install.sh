@@ -22,5 +22,5 @@ fi
 docker-compose up -d
 
 ./createProject.sh
-#./npmInstall.sh
+#./updateProject.sh
 ./start.sh

@@ -81,13 +81,13 @@ $ ./install.sh
 Après l'installation, il faudra modifier le contenu du fichier "**install.sh**" :
 ```
 ./createProject.sh
-#./npmInstall.sh
+#./updateProject.sh
 ./start.sh
 ```
 Par :
 ```
 #./createProject.sh
-./npmInstall.sh
+./updateProject.sh
 ./start.sh
 ```
 Si ce n'est pas déjà fait.
@@ -159,7 +159,7 @@ Vous pouvez modifier le démarrage de votre projet dans le fichier "**createProj
 ```
 docker exec $NAME_NODEJS_CONTAINER bash -c "ng new projectAngular --routing --defaults --skip-git && cp .gitignore projectAngular/"
 ```
-Dans le fichier "**npmInstall.sh**" :
+Dans le fichier "**updateProject.sh**" :
 ```
 docker exec $NAME_NODEJS_CONTAINER bash -c "cd projectAngular && npm install"
 ```
