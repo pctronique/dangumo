@@ -5,7 +5,15 @@ La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
 <details>
   <summary>Table des matières</summary>
   <ol>
-    <li><a href="#installé-à-la-base-du-projet-docker">Installé à la base du projet docker</a></li>
+    <li>
+        <a href="#présentation">Présentation</a>
+        <ul>
+            <li><a href="#conteneur-nodeJS">Conteneur nodeJS</a></li>
+            <li><a href="#conteneur-mailhog">Conteneur mailhog</a></li>
+            <li><a href="#conteneur-mongo-express">Conteneur mongo-express</a></li>
+            <li><a href="#conteneur-mongo">Conteneur mongo</a></li>
+        </ul>
+    </li>
     <li>
         <a href="#création-du-conteneur-docker">Création du conteneur (Docker)</a>
         <ul>
@@ -30,12 +38,37 @@ La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
     <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
   </ol>
 </details>
-    
-## Installé à la base du projet docker
-* [docker nodeJS](https://hub.docker.com/_/node/)
-* pm2 (docker nodeJS)
-* angular (docker nodeJS)
-* [docker mongoDB](https://hub.docker.com/_/mongo)
+
+## Présentation
+La base docker pour un projet en nodejs.
+
+### Conteneur nodeJS
+Il est conçu à partir de l'image du [docker nodeJS](https://hub.docker.com/_/node/).<br />
+Il installe aussi dans le conteneur :<br />
+* [pm2](https://pm2.keymetrics.io/)
+<br /> C'est dans ce conteneur que vous allez placer vos codes nodeJS, dans le dossier "**project**".
+<br /><img src="./images/screen63.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+
+### Conteneur mailhog
+Il est conçu à partir de l'image du [docker mailhog](https://hub.docker.com/r/mailhog/mailhog/).<br />
+Ce conteneur va vous permettre de visualiser les emails transmis par votre projet nodeJS.
+<br /><img src="./images/screen65.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+
+### Conteneur mongo-express
+Il est conçu à partir de l'image du [docker mongo-express](https://hub.docker.com/r/mailhog/mailhog/).<br />
+Ce conteneur va vous permettre de visualiser votre base de données mongodb (NOSQL).
+<br /><img src="./images/screen64.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+
+### Conteneur mongo
+Il est conçu à partir de l'image du [docker mongo](https://hub.docker.com/_/mongo).<br />
+Ce conteneur contiendra votre base de donnée. Il est possible de visualiser son contenu à partir du [conteneur mongo-express](#conteneur-mongo-express)<br />
+Il est possible d'entrer des tables lors de sa création, pour se faire il faudra récupérer les tables sous format json et les placer dans un dossier et modifier le fichier "**docker-compose.yml**".<br />
+J'ai mis en place un exemple avec la table people "**people.json**" :
+```
+# start data
+- ./.docker/sgbd_data/people.json:/mongo-seed/people.json
+# end data
+```
 
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 

@@ -2,5 +2,7 @@
     "type":"mongodb",
     "host":"mongo",
     "port":27017,
-    "base":"dnodejs"
+    "name":"dangu",
+    "user"   : "root",
+    "pass"   : "secret"
 }
