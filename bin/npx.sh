@@ -2,4 +2,4 @@ while read line
 do   
    export $line
 done < ${0%/*}/../.env
-docker exec -it $NAME_NODEJS_CONTAINER npx "$@"
+docker exec -it $NAME_ANGULAR_CONTAINER npx "$@"

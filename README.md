@@ -1,14 +1,13 @@
 # dangu (Docker ANGUlar)
 
-La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
-
 <details>
   <summary>Table des matières</summary>
   <ol>
     <li>
         <a href="#présentation">Présentation</a>
         <ul>
-            <li><a href="#conteneur-nodeJS">Conteneur nodeJS</a></li>
+            <li><a href="#l-avantage-d-utiliser-docker">L'avantage d'utiliser docker</a></li>
+            <li><a href="#conteneur-angular">Conteneur angular</a></li>
             <li><a href="#conteneur-mailhog">Conteneur mailhog</a></li>
             <li><a href="#conteneur-mongo-express">Conteneur mongo-express</a></li>
             <li><a href="#conteneur-mongo">Conteneur mongo</a></li>
@@ -33,21 +32,36 @@ La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
         </ul>
     </li>
     <li><a href="#le-dossier-du-projet">Le dossier du projet</a></li>
-    <li><a href="#mini-projet-nodejs">Mini projet nodejs</a></li>
+    <li><a href="#mini-projet-nodejs">Mini projet angular</a></li>
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
     <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
   </ol>
 </details>
 
 ## Présentation
-La base docker pour un projet en nodejs.
+La base docker pour un projet angular. Ceci est une base, vous pouvez le modifier selon vos besoins.<br />
+> [!WARNING]
+> Vous devez installer docker pour pouvoir l'utiliser.
 
-### Conteneur nodeJS
+### L'avantage d'utiliser docker
+Lorsque vos faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**dangu**" (**que vous pouvez et surtout devez le renommer au nom de votre projet**) dans un git.<br />
+Les avantages :<br />
+* Pas de programme à installer sur votre pc (à part docker et un éditeur ou IDE)
+* Travailler à plusieurs avec les mêmes conteneurs à l'identique
+* Prêt à travailler directement sur le code après la création des conteneurs
+* Avoir une base prés remplie lors de la création des conteneurs.<sup>(1)</sup>
+<br /> Après installation des conteneurs, on peut directement continuer le code.
+<sup>(1) [Conteneur mongo](#conteneur-mongo)</sup>
+
+### Conteneur angular
 Il est conçu à partir de l'image du [docker nodeJS](https://hub.docker.com/_/node/).<br />
+Il contiendra vos codes.<br />
 Il installe aussi dans le conteneur :<br />
-* [pm2](https://pm2.keymetrics.io/)
-<br /> C'est dans ce conteneur que vous allez placer vos codes nodeJS, dans le dossier "**project**".
-<br /><img src="./images/screen63.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+* [angular](https://angular.io/cli/serve)
+
+<br /> 
+C'est dans ce conteneur que vous allez placer vos codes angular, dans le dossier "**project**" (qui est lié au conteneur).
+<br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple nodejs server" width="300" height="175"><br />
 
 ### Conteneur mailhog
 Il est conçu à partir de l'image du [docker mailhog](https://hub.docker.com/r/mailhog/mailhog/).<br />
@@ -57,7 +71,7 @@ Ce conteneur va vous permettre de visualiser les emails transmis par votre proje
 ### Conteneur mongo-express
 Il est conçu à partir de l'image du [docker mongo-express](https://hub.docker.com/r/mailhog/mailhog/).<br />
 Ce conteneur va vous permettre de visualiser votre base de données mongodb (NOSQL).
-<br /><img src="./images/screen64.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+<br /><img src="./images/screen68.jpg" alt="exemple nodejs server" width="300" height="175"><br />
 
 ### Conteneur mongo
 Il est conçu à partir de l'image du [docker mongo](https://hub.docker.com/_/mongo).<br />
@@ -69,22 +83,30 @@ J'ai mis en place un exemple avec la table people "**people.json**" :
 - ./.docker/sgbd_data/people.json:/mongo-seed/people.json
 # end data
 ```
+<br /><img src="./images/screen69.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+
+> [!NOTE]
+> Vous pouvez changer de SGBD pour un SQL. Pour les projet en nodeJS on utilise principalement un SGBD NOSQL.
 
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 
 Pour la création du conteneur docker pour le projet.
 ### Le fichier .env
-Modifier le contenu du fichier .env.example :
+Modifier le contenu du fichier "**.env.example**" :
 ```
 NAME_PROJECT=dangu
-NAME_NODEJS_CONTAINER=dangu_httpd
+NAME_ANGULAR_CONTAINER=dangu_angular
 NAME_SGBD_CONTAINER=dangu_mongo
+NAME_MOEXPRESS_CONTAINER=dangu_moexpress
+NAME_MAILHOG_CONTAINER=dangu_mailhog
 ```
 Par le nom de votre projet, par exemple 'nameProject' :
 ```
 NAME_PROJECT=nameProject
-NAME_NODEJS_CONTAINER=nameProject_httpd
+NAME_ANGULAR_CONTAINER=nameProject_angular
 NAME_SGBD_CONTAINER=nameProject_mongo
+NAME_MOEXPRESS_CONTAINER=nameProject_moexpress
+NAME_MAILHOG_CONTAINER=nameProject_mailhog
 ```
 Créé un fichier "**.env**" à partir du fichier "**.env.example**" (copier/coller). <br />
 > [!WARNING]
@@ -93,15 +115,17 @@ Créé un fichier "**.env**" à partir du fichier "**.env.example**" (copier/col
 ### Modifier l'adresse de port
 Si vous avez besoin de modifier le port, merci de le faire dans le fichier "**.env**".<br />
 > [!WARNING]
-> Ne surtout pas le faire dans le fichier "**.env.example**".<br />
+> Ne surtout pas le faire dans le fichier "**.env.example**".
 
-Un port de votre pc peut être utilisé par un autre projet, il faudra donc modifier celui-ci. Ce qui est vrai sur un pc, ne le sera pas sur les autres, donc on ne modifit pas les valeurs dans le fichier "**.env.example**".<br />
+<br />Un port de votre pc peut être utilisé par un autre projet, il faudra donc modifier celui-ci. Ce qui est vrai sur un pc, ne le sera pas sur les autres, donc on ne modifit pas les valeurs dans le fichier "**.env.example**".<br />
 Il est préférable d'incrémenter à l'identique les ports du projet.<br />
 Je dois incrémenter de 9 un des ports, je le fais aussi pour les autres. Ceci évite de se perdre dans les ports disponibles.<br />
 Exemple :<br />
 ```
-VALUE_NODEJS_PORT=4209
+VALUE_ANGULAR_PORT=4209
 VALUE_SGBD_PORT=27029
+VALUE_MOEXPRESS_PORT=8089
+VALUE_MAILHOG_DISPLAY_PORT=8029
 ```
 
 ### Installer le conteneur
@@ -127,7 +151,7 @@ Si ce n'est pas déjà fait.
 
 ### Modifier les versions
 > [!WARNING]
-> Il est indispensable de le faire pour pouvoir utiliser un conteneur identique des années plus tard.
+> Il est indispensable de le faire pour pouvoir utiliser un conteneur identique des années plus tard. Surtout pour le conteneur qui contient le code.
 
 Sur le projet actuel, on utilise les nouvelles versions ce qui peut poser des problèmes sur le projet par la suite. Il est préférable d'utiliser la version utilisée lors de la création du projet.
 <br />[docker nodejs](https://hub.docker.com/_/node/)
@@ -146,17 +170,27 @@ FROM node:latest
 ```
 FROM node:20.6.1
 ```
-Dans le même fichier, modifier l'installation angular par la bonne version :
-```
-RUN npm install -y --no-install-recommends @angular/cli -g
-```
-```
-RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
-```
+
 <br />
 
 > [!NOTE]
-> Il n'est pas possible de choisir une version pour mongoDB, mais ceci ne pose pas de problème.
+> Vous n'êtes pas obligé à modifier la version des autres conteneurs.
+
+<br />
+
+Pour connaître la version pour mongodb :
+```
+$ ./bin/terminal_mongo.sh
+# mongod --version
+db version v7.0.1
+```
+Remplacer la version dans le fichier "**.env.example**" :
+```
+VALUE_SGBD_VERSION=7.0.1
+VALUE_MOEXPRESS_VERSION=latest
+VALUE_MAILHOG_VERSION=latest
+```
+
 
 ## Rechercher un package (Docker)
 Si vous avez besoin d'un package pour votre projet dans le conteneur. Vous pouvez rechercher les packages disponibles pour le conteneur.
@@ -181,7 +215,7 @@ RUN apt install name_package
 ## Le dossier du projet
 Votre code devra être placé dans le dossier "**project**".
 
-## Mini-projet nodejs
+## Mini-projet angular
 Il y a un mini-projet angular pour vous montrer un exemple, mais vous pouvez le retirer en vidant le dossier "**project**".<br />
 > [!WARNING]
 > Ne surtout pas supprimer le fichier "**.gitignore**" du dossier "**project**".<br />
@@ -190,19 +224,19 @@ Lors de l'installation, il démarre le serveur angular du mini-projet sur '**loc
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier "**bin/createProject.sh**" :
 ```
-docker exec $NAME_NODEJS_CONTAINER bash -c "ng new projectAngular --routing --defaults --skip-git && cp .gitignore projectAngular/"
+docker exec $NAME_ANGULAR_CONTAINER bash -c "ng new projectAngular --routing --defaults --skip-git && cp .gitignore projectAngular/"
 ```
 Dans le fichier "**bin/updateProject.sh**" :
 ```
-docker exec $NAME_NODEJS_CONTAINER bash -c "cd projectAngular && npm install"
+docker exec $NAME_ANGULAR_CONTAINER bash -c "cd projectAngular && npm install"
 ```
-Dans le fichier "**bin/start.sh**" :
+Dans le fichier "**.docker/angular/updateProject.sh**" :
 ```
-docker exec $NAME_NODEJS_CONTAINER bash -c "cd projectAngular && ng serve --host 0.0.0.0 >> ../../projecttmp/logs/angular/ng_out.log 2>> ../../projecttmp/logs/angular/ng_error.log" &
+ng serve --host 0.0.0.0 >> ../../projecttmp/logs/angular/ng_out.log 2>> ../../projecttmp/logs/angular/ng_error.log
 ```
 Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
 ```
-$ ./bin/start.sh
+$ ./start.sh
 ```
 
 ## Les commandes angular dans le mini-projet

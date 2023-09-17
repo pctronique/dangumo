@@ -1,8 +1,8 @@
 {
-    "type":"mongodb",
-    "host":"mongo",
-    "port":27017,
-    "name":"dangu",
+    "type"   : "mongodb",
+    "host"   : "mongo",
+    "port"   : 27017,
+    "name"   : "dangu",
     "user"   : "root",
     "pass"   : "secret"
 }
