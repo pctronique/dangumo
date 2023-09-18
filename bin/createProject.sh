@@ -30,6 +30,8 @@ then
    echo "   --style	The file extension or preprocessor to use for style files.		css | scss | sass | less"
    echo "   --view-encapsulation	The view encapsulation strategy to use in the initial project.		Emulated | None | ShadowDom"
 else
-   docker exec $NAME_ANGULAR_CONTAINER bash -c "ng new $FOLDER_PROJECT_ANGULAR --routing --defaults --skip-git $@ && cp .gitignore $FOLDER_PROJECT_ANGULAR/"
+   docker exec $NAME_ANGULAR_CONTAINER bash -c "ng new $FOLDER_PROJECT_ANGULAR --routing --defaults --skip-git $@"
+   docker exec $NAME_REACT_CONTAINER bash -c "chmod 777 -R $FOLDER_PROJECT_ANGULAR"
+   docker exec $NAME_ANGULAR_CONTAINER bash -c "cp .gitignore $FOLDER_PROJECT_ANGULAR/"
    docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR/ && npm install nodemailer && npm install mongodb"
 fi
