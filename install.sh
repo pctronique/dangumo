@@ -25,6 +25,6 @@ docker-compose up -d
 
 ./bin/import_sgbd.sh
 
-#./bin/createProject.sh
-./bin/updateProject.sh
+./bin/createProject.sh
+#./bin/updateProject.sh
 ./start.sh
