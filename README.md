@@ -182,12 +182,19 @@ v20.6.1
 # ng version
 Angular CLI: 16.2.2
 ```
-Dand le fichier "**.docker/angular/Dockerfile**", remplacé '**latest**' par la bonne version disponible pour docker :
+Dans le fichier "**.docker/angular/Dockerfile**", remplacé '**latest**' par la bonne version disponible pour docker :
 ```
 FROM node:latest
 ```
 ```
 FROM node:20.6.1
+```
+Pour angular dans le même fichier :
+```
+RUN npm install -y --no-install-recommends @angular/cli -g
+```
+```
+RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
 ```
 
 <br />
