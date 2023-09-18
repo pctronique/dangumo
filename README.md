@@ -180,7 +180,7 @@ FROM node:20.6.1
 <br />
 
 > [!NOTE]
-> Vous n'êtes pas obligé à modifier la version des autres conteneurs.
+> Vous n'êtes pas obligé de modifier la version des autres conteneurs.
 
 <br />
 
