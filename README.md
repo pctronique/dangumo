@@ -32,7 +32,13 @@
         </ul>
     </li>
     <li><a href="#le-dossier-du-projet">Le dossier du projet</a></li>
-    <li><a href="#mini-projet-nodejs">Mini projet angular</a></li>
+    <li>
+        <a href="#mini-projet-nodejs">Mini projet angular</a>
+        <ul>
+            <li><a href="#le-fichier-env">Le fichier .env</a></li>
+            <li><a href="#options-pour-la-création-du-projet-angular">Options pour la création du projet angular</a></li>
+        </ul>
+    </li>
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
     <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
   </ol>
@@ -229,6 +235,24 @@ FOLDER_PROJECT_ANGULAR=projectAngular
 Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
 ```
 $ ./start.sh
+```
+
+### Options pour la création du projet angular
+Il est possible de créer un projet avec des options, comme l'utilisation de sass ou less.( [ng new](https://angular.io/cli/new) )<br />
+```
+$ ./bin/createProject.sh --help
+Options:
+    --style      The file extension or preprocessor to use for style files.              css | scss | sass | less
+```
+En ligne de commande :
+```
+$ ./bin/createProject.sh --style=scss
+```
+Ou dans le fichier "**install.sh**" :
+```
+./bin/createProject.sh --style=scss
+#./bin/updateProject.sh
+./start.sh
 ```
 
 ## Les commandes angular dans le mini-projet
