@@ -38,7 +38,7 @@ Version 1.0.0
     <li>
         <a href="#mini-projet-nodejs">Mini projet angular</a>
         <ul>
-            <li><a href="#le-fichier-env">Le fichier .env</a></li>
+            <li><a href="#mini-projet-nodejs">Packages installés dans le mini-projet</a></li>
             <li><a href="#options-pour-la-création-du-projet-angular">Options pour la création du projet angular</a></li>
         </ul>
     </li>
