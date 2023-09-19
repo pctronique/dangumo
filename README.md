@@ -1,4 +1,5 @@
 # dangumo (Docker ANGUlar MOngo)
+Version 1.0.0
 
 <details>
   <summary>Table des matières</summary>
