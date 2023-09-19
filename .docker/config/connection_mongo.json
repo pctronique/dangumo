@@ -2,7 +2,7 @@
     "type"   : "mongodb",
     "host"   : "mongo",
     "port"   : 27017,
-    "name"   : "dangu",
+    "name"   : "dangumo",
     "user"   : "root",
     "pass"   : "secret"
 }

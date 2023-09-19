@@ -13,31 +13,16 @@ DAEMONUSER="root" #utilisateur du programme
 daemon_NAME="startserver" #Nom du programme (doit être identique à l'exécutable).
 
 d_start () {
-    /home/updateProject.sh
-}
- 
-#d_stop () {
-#}
- 
-d_restart () {
-    d_start
-}
- 
-d_list () {
-    /home/updateProject.sh
+    /home/updateProject.sh & 
 }
  
 case "$1" in
-    start|stop|list)
+    start)
         d_${1}
         ;;
- 
-    restart|reload)
-        d_restart
-        ;;
 
-    *)
-        echo "Usage: /etc/init.d/$daemon_NAME {start|restart|reload}"
+    helps)
+        echo "Usage: /etc/init.d/$daemon_NAME start"
         exit 1
         ;;
 esac
