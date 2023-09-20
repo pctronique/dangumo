@@ -6,7 +6,7 @@
 /project/updateProject.sh
 /projecttmp/
 /.env
-/project/projectAngular/node_modules/
-/project/projectAngular/npm-debug.log
-/project/projectAngular/yarn-error.log
-/project/projectAngular/package-lock.json
+/project/www/node_modules/
+/project/www/npm-debug.log
+/project/www/yarn-error.log
+/project/www/package-lock.json

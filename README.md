@@ -288,7 +288,7 @@ Lors de l'installation, il démarre le serveur angular du mini-projet sur '**loc
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier ".env.example" et aussi dans le fichier ".env" :
 ```
-FOLDER_PROJECT_ANGULAR=projectAngular
+FOLDER_PROJECT_ANGULAR=www
 ```
 Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
 ```
@@ -326,7 +326,7 @@ Ou dans le fichier "**install.sh**" :
 Vous allez avoir besoin de faire des commandes angular sur votre code, pour ce faire :
 ```
 $ ./bin/terminal.sh
-# cd projectAngular/
+# cd www/
 # ng generate component hero-detail
 # ng generate component xyz
 ```
