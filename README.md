@@ -290,10 +290,6 @@ Vous pouvez modifier le démarrage de votre projet dans le fichier ".env.example
 ```
 FOLDER_PROJECT_ANGULAR=www
 ```
-Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
-```
-$ ./start.sh
-```
 
 ### Packages installés dans le mini-projet
 Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/createProject.sh**"
