@@ -6,7 +6,6 @@ done < ${0%/*}/../.env
 
 d_start () {
    docker container start $NAME_ANGULAR_CONTAINER
-   #docker exec $NAME_ANGULAR_CONTAINER /etc/init.d/startserver start 
 }
 
 d_stop () {
