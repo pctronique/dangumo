@@ -2,4 +2,4 @@ while read line
 do   
    export $line
 done < ${0%/*}/../.env
-docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR && npm install"
+docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT && npm install"

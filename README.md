@@ -185,10 +185,10 @@ Il est préférable d'incrémenter à l'identique les ports du projet.<br />
 Si je dois incrémenter de 9 un des ports (je conserve la valeur d'incrémentation la plus haute), je le fais aussi pour les autres dans le fichier "**.env**". Ceci évite de se perdre dans les ports disponibles.<br />
 Exemple :<br />
 ```
-VALUE_ANGULAR_PORT=4209
+VALUE_PROJECT_PORT=4209
 VALUE_SGBD_PORT=27029
-VALUE_MOEXPRESS_PORT=8089
-VALUE_MAILHOG_DISPLAY_PORT=8029
+VALUE_SGBD_DISPLAY_PORT=8089
+VALUE_MAIL_DISPLAY_DISPLAY_PORT=8029
 ```
 
 ### Installer le conteneur
@@ -244,8 +244,8 @@ RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
 Pour modifier la version des autres conteneurs, c'est dans le fichier "**.env.example**" :
 ```
 VALUE_SGBD_VERSION=latest
-VALUE_MOEXPRESS_VERSION=latest
-VALUE_MAILHOG_VERSION=latest
+VALUE_SGBD_DISPLAY_VERSION=latest
+VALUE_MAIL_DISPLAY_VERSION=latest
 ```
 
 
@@ -314,14 +314,14 @@ Lors de l'installation, il démarre le serveur angular du mini-projet sur '**loc
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier ".env.example" et aussi dans le fichier ".env" :
 ```
-FOLDER_PROJECT_ANGULAR=www
+FOLDER_PROJECT=www
 ```
 
 ### Packages installés dans le mini-projet
 Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/createProject.sh**"
 ```
-docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR/ && npm install nodemailer"
-docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR/ && npm install mongodb"
+docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install nodemailer"
+docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install mongodb"
 ```
 > [!NOTE]
 > Vous pouvez les retirer si vous en avez pas besoin.
