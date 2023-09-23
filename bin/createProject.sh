@@ -32,6 +32,7 @@ then
 else
    docker exec $NAME_ANGULAR_CONTAINER bash -c "ng new $FOLDER_PROJECT_ANGULAR --routing --defaults --skip-git $@"
    docker exec $NAME_ANGULAR_CONTAINER bash -c "chmod 777 -R $FOLDER_PROJECT_ANGULAR"
+   ${0%/*}/install/in_install.sh
    docker exec $NAME_ANGULAR_CONTAINER bash -c "cp .gitignore $FOLDER_PROJECT_ANGULAR/"
    docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR/ && npm install nodemailer"
    docker exec $NAME_ANGULAR_CONTAINER bash -c "cd $FOLDER_PROJECT_ANGULAR/ && npm install mongodb"
