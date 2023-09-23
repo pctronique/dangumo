@@ -1,4 +1,5 @@
 # dangumo (Docker ANGUlar MOngo)
+Par [pctronique](https://pctronique.fr/) <br />
 Version 1.0.0
 
 <details>
@@ -13,12 +14,14 @@ Version 1.0.0
             <li><a href="#conteneur-mongo-express">Conteneur mongo-express</a></li>
             <li><a href="#conteneur-mongo">Conteneur mongo</a></li>
             <li><a href="#conteneurs-sgbd">Conteneurs SGBD</a></li>
+            <li><a href="#les-fichiers-de-configurations">Les fichiers de configurations</a></li>
         </ul>
     </li>
     <li>
         <a href="#création-du-conteneur-docker">Création du conteneur (Docker)</a>
         <ul>
             <li><a href="#le-fichier-env">Le fichier .env</a></li>
+            <li><a href="#les-ports-utilisés-par-docker">Les ports utilisés par docker</a></li>
             <li><a href="#modifier-l-adresse-de-port">Modifier l'adresse de port</a></li>
             <li><a href="#installer-le-conteneur">Installer le conteneur</a></li>
             <li><a href="#modifier-le-fichier-d-intallation">Modifier le fichier d'intallation</a></li>
@@ -29,15 +32,15 @@ Version 1.0.0
     <li>
         <a href="#install-un-package-docker">Install un package (Docker)</a>
         <ul>
-            <li><a href="#le-fichier-env">Le fichier .env</a></li>
             <li><a href="#dans-dockerfile">Dans Dockerfile</a></li>
         </ul>
     </li>
     <li><a href="#logs-et-info-conteneur-docker">Logs et info conteneur (Docker)</a></li>
     <li><a href="#le-dossier-du-projet">Le dossier du projet</a></li>
     <li>
-        <a href="#mini-projet-nodejs">Mini projet angular</a>
+        <a href="#mini-projet-angular">Mini projet angular</a>
         <ul>
+            <li><a href="#les-fichiers-de-configurations-du-projet">Les fichiers de configurations du projet</a></li>
             <li><a href="##packages-installés-dans-le-mini-projet">Packages installés dans le mini-projet</a></li>
             <li><a href="#options-pour-la-création-du-projet-angular">Options pour la création du projet angular</a></li>
         </ul>
@@ -45,6 +48,7 @@ Version 1.0.0
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
     <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
     <li><a href="#server-start-stop-restart">Server start|stop|restart</a></li>
+    <li><a href="#en-cas-de-problème-lors-d-installation">En cas de problème lors d'installation</a></li>
   </ol>
 </details>
 
@@ -53,15 +57,21 @@ La base docker pour un projet angular. Ceci est une base, vous pouvez le modifie
 > [!WARNING]
 > Vous devez installer docker pour pouvoir l'utiliser.
 
+<br />
+Vous devez placer votre code dans le dossier "**project/www/**" .
+<br /> 
+
+> [!NOTE]
+> Le serveur démarre automatique au démarrage du conteneur, vous n'avez normalement pas besoin de le démarrer par vous-même.
+
 ### L'avantage d'utiliser docker
 Lorsque vos faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**dangumo**" (**que vous pouvez et surtout devez le renommer au nom de votre projet**) dans un git.<br />
 Les avantages :<br />
 * Pas de programme à installer sur votre pc (à part docker et un éditeur ou IDE)
 * Travailler à plusieurs avec les mêmes conteneurs à l'identique
 * Prêt à travailler directement sur le code après la création des conteneurs
-* Avoir une base prés remplie lors de la création des conteneurs.<sup>(1)</sup>
+* Avoir une base prés remplie lors de la création des conteneurs.<sup>(1) [Conteneur mongo](#conteneur-mongo)</sup>
 <br /> Après installation des conteneurs, on peut directement continuer le code.
-<sup>(1) [Conteneur mongo](#conteneur-mongo)</sup>
 
 ### Conteneur angular
 Il est conçu à partir de l'image du [docker nodeJS](https://hub.docker.com/_/node/).<br />
@@ -110,38 +120,69 @@ Ici je vais présenter quelques conteneurs SGBD et leurs visionneurs sous le for
 
 Ceci est une petite partie des [SGBD](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_base_de_donn%C3%A9es), vous pouvez vérifier la disponibilité de votre SGBD dans [docker hub](https://hub.docker.com/).
 
+### Les fichiers de configurations
+Vous pouvez configurer votre serveur ou le php :
+* connection_server.json : dans le dossier ".docker/config/"
+
+> [!WARNING]
+> Si vous modifiez les configurations, il faudra redémarrer le conteneur : " [Server start|stop|restart](#server-start-stop-restart) ". <br />
+> Vous n'avez pas besoin de le modifier et il doit conserver l'adresse du port du conteneur (pas mettre celui de votre pc).
+
+
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 
-Pour la création du conteneur docker pour le projet.
+Pour la création du conteneur docker du projet.
+
 ### Le fichier .env
-Modifier le contenu du fichier "**.env.example**" :
+Pour concevoir le projet avec le nom de "**nameProject**" :
 ```
-NAME_PROJECT=dangumo
-NAME_ANGULAR_CONTAINER=dangumo_angular
-NAME_SGBD_CONTAINER=dangumo_mongo
-NAME_MOEXPRESS_CONTAINER=dangumo_moexpress
-NAME_MAILHOG_CONTAINER=dangumo_mailhog
+$ ./bin/name.sh --name=nameProject
 ```
-Par le nom de votre projet, par exemple 'nameProject' :
+Ceci va créer le fichier "**.env**" avec le nom du projet pour les conteneurs.
+
+### Les ports utilisés par docker
+Vous pouvez visualiser les ports utilisés par docker avec la commande :
 ```
-NAME_PROJECT=nameProject
-NAME_ANGULAR_CONTAINER=nameProject_angular
-NAME_SGBD_CONTAINER=nameProject_mongo
-NAME_MOEXPRESS_CONTAINER=nameProject_moexpress
-NAME_MAILHOG_CONTAINER=nameProject_mailhog
+$ docker container ls
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                                                 NAMES
+a0669f134d4e   mongo-express:latest     "tini -- /docker-ent…"   6 seconds ago   Up 3 seconds   0.0.0.0:8080->8081/tcp, :::8080->8081/tcp             dangumo_moexpress
+f2097a7768ce   dangumo_nodjs             "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp             dangumo_nodejs
+0889ec760f46   mongo:latest             "docker-entrypoint.s…"   6 seconds ago   Up 6 seconds   0.0.0.0:27020->27017/tcp, :::27020->27017/tcp         dangumo_mongo
+e23b99a411c2   mailhog/mailhog:latest   "MailHog"                6 seconds ago   Up 6 seconds   1025/tcp, 0.0.0.0:8020->8025/tcp, :::8020->8025/tcp   dangumo_mailhog
 ```
-Créé un fichier "**.env**" à partir du fichier "**.env.example**" (copier/coller). <br />
+Ici, je ne pourrais pas utiliser les ports :::8080, :::3000, :::27020 et :::8020, je devrais utiliser d'autre port. Si mon projet utilise un de ces ports, je devrais incrémenter les ports du projet de mon projet de 1 par exemple, pour 8081, 3001, 27021 et 8021 (si j'ai besoin de ces ports).
+
+<br />
+
 > [!WARNING]
-> Attention de conserver le fichier "**.env.example**".
+> C'est les ports utilisés par docker sur votre pc, mais ceci ne dis pas si d'autre port son utilisé par votre système.
+
+<br />
+
+Pour visualiser les ports utilisés sur **Linux** :
+```
+$ ss -natu | grep 0.0.0.0
+udp   UNCONN 0      0                                      0.0.0.0:5353                      0.0.0.0:*           
+udp   UNCONN 0      0                                      0.0.0.0:34968                     0.0.0.0:*            
+tcp   LISTEN 0      4096                                   0.0.0.0:27020                     0.0.0.0:*           
+tcp   LISTEN 0      4096                                   0.0.0.0:8080                      0.0.0.0:*          
+tcp   LISTEN 0      4096                                   0.0.0.0:8020                      0.0.0.0:*          
+tcp   LISTEN 0      4096                                   0.0.0.0:3000                      0.0.0.0:* 
+```
+Je ne pourrais pas utiliser les ports : 5353, 34968, 27020, 8080, 8020, 3000.
 
 ### Modifier l'adresse de port
 Si vous avez besoin de modifier le port, merci de le faire dans le fichier "**.env**".<br />
 > [!WARNING]
 > Ne surtout pas le faire dans le fichier "**.env.example**".
 
+<br />
+* .env.example : configuration pour tout le monde qui travaille sur le projet <br /> 
+* .env : configuration pour votre pc
+
 <br />Un port de votre pc peut être utilisé par un autre projet, il faudra donc modifier celui-ci. Ce qui est vrai sur un pc, ne le sera pas sur les autres, donc on ne modifit pas les valeurs dans le fichier "**.env.example**".<br />
 Il est préférable d'incrémenter à l'identique les ports du projet.<br />
-Je dois incrémenter de 9 un des ports, je le fais aussi pour les autres. Ceci évite de se perdre dans les ports disponibles.<br />
+Si je dois incrémenter de 9 un des ports (je conserve la valeur d'incrémentation la plus haute), je le fais aussi pour les autres dans le fichier "**.env**". Ceci évite de se perdre dans les ports disponibles.<br />
 Exemple :<br />
 ```
 VALUE_ANGULAR_PORT=4209
@@ -156,20 +197,13 @@ Vous pouvez créer votre conteneur.
 $ ./install.sh
 ```
 
-### Modifier le fichier d'intallation
-Après l'installation, il faudra modifier le contenu du fichier "**install.sh**" :
-```
-./bin/createProject.sh
-#./bin/updateProject.sh
-./bin/start.sh
-```
-Par :
-```
-#./bin/createProject.sh
-./bin/updateProject.sh
-./bin/start.sh
-```
-Si ce n'est pas déjà fait.
+> [!WARNING]
+> Ne surtout pas faire la commande '$ docker-compose up --build -d'.
+
+<br />
+
+> [!NOTE]
+> Vous devez faire '$ ./install.sh', même après avoir récupéré le projet de votre git.
 
 ### Modifier les versions
 > [!WARNING]
@@ -207,15 +241,9 @@ RUN npm install -y --no-install-recommends @angular/cli@16.2.2 -g
 
 <br />
 
-Pour connaître la version pour mongodb :
+Pour modifier la version des autres conteneurs, c'est dans le fichier "**.env.example**" :
 ```
-$ ./bin/terminal_mongo.sh
-# mongod --version
-db version v7.0.1
-```
-Remplacer la version dans le fichier "**.env.example**" :
-```
-VALUE_SGBD_VERSION=7.0.1
+VALUE_SGBD_VERSION=latest
 VALUE_MOEXPRESS_VERSION=latest
 VALUE_MAILHOG_VERSION=latest
 ```
@@ -233,6 +261,12 @@ Si vous avez besoin d'installer un package dans votre conteneur.
 ```
 $ ./bin/terminal.sh
 # apt install name_package
+```
+
+### Dans Dockerfile
+Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/nodejs/Dockerfile**", pour le conserver. Avant le "**CMD **".
+```
+RUN apt install name_package
 ```
 
 ## Logs et info conteneur (Docker)
@@ -261,29 +295,21 @@ Options:
 $ ./bin/container_info.sh --mailhog
 ```
 <br />
+
 > [!WARNING]
 > Il contient beaucoup d'information sous un format json et ce n'est pas facile de le lire sur le terminal, il est préférable de le mettre dans un fichier json.
+
 <br />
 Pour mettre les informations dans un fichier json :
 ```
 $ ./bin/container_info.sh --mailhog >> mailhog_info.json
 ```
 
-### Dans Dockerfile
-Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/linux_agcc/Dockerfile**", pour le conserver. Vous devez ajouter la ligne suivante à la fin du fichier avec le bon nom de package.
-```
-RUN apt install name_package
-```
-
 ## Le dossier du projet
-Votre code devra être placé dans le dossier "**project**".
+Votre code devra être placé dans le dossier "**project/www**".
 
 ## Mini-projet angular
-Il y a un mini-projet angular pour vous montrer un exemple, mais vous pouvez le retirer en vidant le dossier "**project**".<br />
-> [!WARNING]
-> Ne surtout pas supprimer le fichier "**.gitignore**" du dossier "**project**".
-<br />
-
+Il y a un mini-projet angular pour vous montrer un exemple, mais vous pouvez le retirer en vidant le dossier "**project/www**".<br />
 Lors de l'installation, il démarre le serveur angular du mini-projet sur '**localhost:4200**' si vous n'avez pas modifié le port (sinon il faut modifier le numéro de port du lien) :
 <br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier ".env.example" et aussi dans le fichier ".env" :
@@ -318,8 +344,19 @@ Ou dans le fichier "**install.sh**" :
 ./start.sh
 ```
 
-## Les commandes angular dans le mini-projet
-Vous allez avoir besoin de faire des commandes angular sur votre code, pour ce faire :
+### Les fichiers de configurations du projet
+Vous pouvez configurer celui-ci :
+* config_email.json : dans le dossier ".docker/config/"
+* connection_mongo.json : dans le dossier ".docker/config/"
+
+> [!WARNING]
+> Ne pas modifier les fichiers "**config_sgbd.php**" et "**connection_mongo.php**" du dossier "**project/www/config**" qui sont et resteront vide. 
+
+
+<br />
+
+## Les commandes nodejs dans le mini-projet
+Vous allez avoir besoin de faire des commandes nodejs sur votre code, pour ce faire :
 ```
 $ ./bin/terminal.sh
 # cd www/
@@ -346,3 +383,8 @@ $ ./bin/server.sh start
 $ ./bin/server.sh stop
 $ ./bin/server.sh restart
 ```
+
+## En cas de problème lors d'installation
+Par exemple un problème d'adresse de port, comme l'image ci-dessous :
+<br /><img src="./images/screen742.jpg" alt="exemple angular server" width="300" height="175"><br />
+Pas de panique, modifier les ports et relancer l'installation.
