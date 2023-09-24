@@ -1,4 +1,7 @@
 #!/bin/bash
+if ! ${0%/*}/message_create_container.sh ; then
+  exit 1
+fi
 
 while read line  
 do   
@@ -48,3 +51,5 @@ sed -i "s/$PACK_JSON_LINE1/$PACK_JSON_LINE1_REPLACE/" $PACK_JSON_FILE
 
 cd ${0%/*}/../../
 docker-compose up -d
+
+exit 0
