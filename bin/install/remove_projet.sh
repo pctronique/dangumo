@@ -14,6 +14,7 @@ rm -f -r "$FOLDER_BASE/docker-compose.yml"
 
 if [ -e ${0%/*}/../../.env ]
 then
+
    while read line  
    do   
       export $line
@@ -21,6 +22,7 @@ then
 
    rm -f -r "$FOLDER_BASE/project/$FOLDER_PROJECT"
    $FOLDER_BASE/bin/gitignore.sh
+
 fi
 
 rm -f -r "$FOLDER_BASE/.env"

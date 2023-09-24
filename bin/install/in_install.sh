@@ -8,7 +8,7 @@ do
    export $line
 done < ${0%/*}/../../.env
 
-cp ${0%/*}/../../.docker/config/.gitignore ${0%/*}/../../project/www/.gitignore
+cp ${0%/*}/../../.docker/config/gitignore_angular ${0%/*}/../../project/www/.gitignore
 
 #LINE1="- .\/.docker\/config\/.env.local.example:\/home\/project\/www\/.env.local:ro"
 #LINE1_REPLACE="- .\/.docker\/config\/.env.local.example:\/home\/project\/$FOLDER_PROJECT_SYMFONY\/.env.local:ro"
