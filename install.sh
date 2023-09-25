@@ -23,12 +23,12 @@ then
   fi
 fi
 
-if [ -e ${0%/*}/install_tmp/type_install ]
+if [ -e ${0%/*}/tmp_install/type_install ]
 then
   while read line  
   do   
     export $line
-  done < ${0%/*}/install_tmp/type_install
+  done < ${0%/*}/tmp_install/type_install
 else
   TYPE_INSTALL_PROJECT="update"
 fi
@@ -47,7 +47,7 @@ chmod 777 -R ${0%/*}/projecttmp 2> /tmp/error_chmod_docker.log
 rm -f -r "/tmp/error_chmod_docker.log"
 
 # creation du docker du projet
-if docker-compose up --build -d ; then
+if docker compose up -d ; then
 
   ${0%/*}/bin/import_sgbd.sh
 
@@ -64,7 +64,7 @@ if docker-compose up --build -d ; then
 
   ${0%/*}/start.sh
 
-  rm -f -r "${0%/*}/install_tmp"
+  rm -f -r "${0%/*}/tmp_install"
 
   ${0%/*}/bin/install/display_web.sh
 

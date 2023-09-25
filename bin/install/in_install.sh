@@ -50,6 +50,8 @@ PACK_JSON_FILE="${0%/*}/../../project/$FOLDER_PROJECT/package.json"
 sed -i "s/$PACK_JSON_LINE1/$PACK_JSON_LINE1_REPLACE/" $PACK_JSON_FILE
 
 cd ${0%/*}/../../
-docker-compose up -d
+if ! docker compose up -d ; then
+  exit 1
+fi
 
 exit 0
