@@ -1,12 +1,12 @@
 #!/bin/bash
-if ! ${0%/*}/install/message_create_container.sh ; then
+if ! ${0%/*}/message_create_container.sh ; then
    exit 1
 fi
 
 while read line  
 do   
    export $line
-done < ${0%/*}/../.env
+done < ${0%/*}/../../.env
 if [[ "$1" = "--helps" ]]
 then
    #docker exec -it $NAME_PROJECT_CONTAINER ng "$@"
@@ -35,12 +35,31 @@ then
    echo "   --style	The file extension or preprocessor to use for style files.		css | scss | sass | less"
    echo "   --view-encapsulation	The view encapsulation strategy to use in the initial project.		Emulated | None | ShadowDom"
 else
-   docker exec $NAME_PROJECT_CONTAINER bash -c "ng new $FOLDER_PROJECT --routing --defaults --skip-git $@"
-   docker exec $NAME_PROJECT_CONTAINER bash -c "chmod 777 -R $FOLDER_PROJECT"
-   ${0%/*}/install/in_install.sh
+
+   if [ -e ${0%/*}/../../tmp_install/type_install ]
+   then
+   while read line  
+   do   
+      export $line
+   done < ${0%/*}/../../tmp_install/type_install
+   fi
+
+   if ! ${0%/*}/project_bash.sh "ng new $FOLDER_PROJECT --routing --defaults --skip-git $@" ; then
+      exit 1
+   fi
+   if ! ${0%/*}/project_bash.sh "chmod 777 -R $FOLDER_PROJECT" ; then
+      exit 1
+   fi
+   if ! ${0%/*}/in_install.sh ; then
+      exit 1
+   fi
    #docker exec $NAME_PROJECT_CONTAINER bash -c "cp .gitignore $FOLDER_PROJECT/"
-   docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install nodemailer"
-   docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install mongodb"
+   if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && npm install nodemailer" ; then
+      exit 1
+   fi
+   if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && npm install mongodb" ; then
+      exit 1
+   fi
 fi
 
 exit 0
