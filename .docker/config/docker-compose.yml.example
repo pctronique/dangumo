@@ -23,6 +23,7 @@ services:
             - ./project:/home/project:rw
             - ./projecttmp/logs/pm2:/root/.pm2/logs/:rw
             - ./projecttmp/logs/angular:/var/log/angular/:rw
+            - ./projecttmp/tmp/angular:/var/tmp/angular/:rw
         ports:
             - ${VALUE_PROJECT_PORT}:4200
         

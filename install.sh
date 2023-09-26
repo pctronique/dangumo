@@ -37,6 +37,8 @@ mkdir -p projecttmp
 mkdir -p projecttmp/logs
 mkdir -p projecttmp/logs/angular
 mkdir -p projecttmp/mongo_data
+mkdir -p projecttmp/tmp
+mkdir -p projecttmp/tmp/angular
 
 touch projecttmp/logs/angular/ng_out.log
 touch projecttmp/logs/angular/ng_error.log
@@ -54,6 +56,9 @@ if docker compose up -d ; then
   if [ $TYPE_INSTALL_PROJECT = "install" ]
   then
     if ! ${0%/*}/bin/install/createProject.sh ; then
+      exit 1
+    fi
+    if ! ${0%/*}/bin/version/recup_all_version.sh ; then
       exit 1
     fi
   else
