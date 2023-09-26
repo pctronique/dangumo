@@ -44,8 +44,13 @@ else
    done < ${0%/*}/../../tmp_install/type_install
    fi
 
-   if ! ${0%/*}/project_bash.sh "ng new $FOLDER_PROJECT --routing --defaults --skip-git $@" ; then
-      exit 1
+   if [ -z "$IS_CREATE_FOLDER" ]
+   then
+      if ! ${0%/*}/project_bash.sh "ng new $FOLDER_PROJECT --routing --defaults --skip-git $@" ; then
+         exit 1
+      else
+         echo "IS_CREATE_FOLDER=false" >> "${0%/*}/../../tmp_install/type_install"
+      fi
    fi
    if ! ${0%/*}/project_bash.sh "chmod 777 -R $FOLDER_PROJECT" ; then
       exit 1
