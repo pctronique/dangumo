@@ -16,5 +16,5 @@ do
    export $line
 done < "${0%/*}/../../$PROJECT_TMP_MAIN/env_version.txt"
 
-sed -i "s/FROM node:latest/FROM node:$NODEJS_VERSION-latest/" $FOLDER_DOCKER/$DOCKER_FOLDER_PROJECT/Dockerfile
+sed -i "s/FROM node:latest/FROM node:$NODEJS_VERSION/" $FOLDER_DOCKER/$DOCKER_FOLDER_PROJECT/Dockerfile
 sed -i "s/RUN npm install -y --no-install-recommends @angular\/cli -g/RUN npm install -y --no-install-recommends @angular\/cli@$PM2_VERSION -g/" $FOLDER_DOCKER/$DOCKER_FOLDER_PROJECT/Dockerfile
