@@ -8,7 +8,7 @@ do
    export $line
 done < ${0%/*}/../../.env
 
-if ! ${0%/*}/project_bash.sh "$@" ; then
+if ! docker exec $NAME_PROJECT_CONTAINER bash -c "$@" ; then
   exit 1
 else
   exit 0
