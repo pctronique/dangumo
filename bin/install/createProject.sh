@@ -59,12 +59,20 @@ else
       exit 1
    fi
    #docker exec $NAME_PROJECT_CONTAINER bash -c "cp .gitignore $FOLDER_PROJECT/"
-   if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && npm install nodemailer" ; then
-      exit 1
+
+   if [ -e ${0%/*}/packages_install.list ]
+   then
+      while read line  
+      do   
+         if [ ! -z "$line" ]
+         then
+            if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && npm install $line" ; then
+            exit 1
+            fi
+         fi
+      done < ${0%/*}/packages_install.list
    fi
-   if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && npm install mongodb" ; then
-      exit 1
-   fi
+
 fi
 
 exit 0

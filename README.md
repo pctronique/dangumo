@@ -352,10 +352,10 @@ FOLDER_PROJECT=www
 ```
 
 ### Packages installés dans le mini-projet
-Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/createProject.sh**"
+Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/install/packages_install.list**"
 ```
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install nodemailer"
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && npm install mongodb"
+nodemailer
+mongodb
 ```
 > [!NOTE]
 > Vous pouvez les retirer si vous en avez pas besoin.
