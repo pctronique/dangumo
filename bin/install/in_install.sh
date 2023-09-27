@@ -5,7 +5,10 @@ fi
 
 while read line  
 do   
-   export $line
+  if [ ! -z "$line" ]
+  then
+      export $line
+  fi
 done < ${0%/*}/../../.env
 
 cp ${0%/*}/../../.docker/config/gitignore_angular ${0%/*}/../../project/www/.gitignore

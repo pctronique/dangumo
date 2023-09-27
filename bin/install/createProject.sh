@@ -5,7 +5,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < ${0%/*}/../../.env
 if [[ "$1" = "--helps" ]]
 then
@@ -40,7 +43,10 @@ else
    then
    while read line  
    do   
-      export $line
+      if [ ! -z "$line" ]
+      then
+         export $line
+      fi
    done < ${0%/*}/../../tmp_install/type_install
    fi
 

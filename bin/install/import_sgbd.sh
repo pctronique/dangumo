@@ -5,7 +5,10 @@ fi
 
 while read line  
 do   
-   export $line
+   if [ ! -z "$line" ]
+   then
+      export $line
+   fi
 done < ${0%/*}/../../.env
 if ! docker exec $NAME_SGBD_CONTAINER bash -c "cd /mongo-seed && ./import.sh" ; then
    exit 1

@@ -5,7 +5,10 @@ FOLDER_ENV_DEF="$FOLDER_DOCKER/file_env"
 
 while read line  
 do   
-   export $line
+   if [ ! -z "$line" ]
+   then
+      export $line
+   fi
 done < $FOLDER_ENV_DEF/.env
 
 ${0%/*}/version_in_project.sh "ng version"
@@ -18,4 +21,4 @@ do
    value_vers="$lineVers"
 done < ${0%/*}/../../$PROJECT_TMP_MAIN/recup_valide_version.txt
 
-echo "PM2_VERSION=$value_vers" >> "${0%/*}/../../$PROJECT_TMP_MAIN/env_version.txt"
+echo "ANGULAR_VERSION=$value_vers" >> "${0%/*}/../../$PROJECT_TMP_MAIN/env_version.txt"
