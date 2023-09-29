@@ -26,8 +26,10 @@ then
       fi
    done < "$FOLDER_BASE/.env"
 
-   rm -f -r "$FOLDER_BASE/project/$FOLDER_PROJECT"
-   $FOLDER_BASE/bin/gitignore.sh
+   rm -f -r "$FOLDER_BASE/project/$FOLDER_PROJECT/package.json"
+   if ! $FOLDER_BASE/bin/gitignore.sh ; then
+      exit 1
+   fi
 
 fi
 

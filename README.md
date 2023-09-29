@@ -82,7 +82,7 @@ Il installe aussi dans le conteneur :<br />
 
 <br /> 
 C'est dans ce conteneur que vous allez placer vos codes angular, dans le dossier "**project**" (qui est lié au conteneur).
-<br /><img src="./images/Screenshot_20230914_092616.png" alt="exemple nodejs server" width="300" height="175"><br />
+<br /><img src="./images/screen63.jpg" alt="exemple nodejs server" width="300" height="175"><br />
 
 ### Conteneur mailhog
 Il est conçu à partir de l'image du [docker mailhog](https://hub.docker.com/r/mailhog/mailhog/).<br />
