@@ -15,11 +15,11 @@ then
     NODE_FOLDER_INIT=/var/docker/nodejs/
 fi
 
-if [ ! -e ${NODE_FOLDER_PROJECT}/package.json ] && [ ! -e ${NODE_FOLDER_PROJECT}/package.json.example ]
-then
-  cp ${NODE_FOLDER_INIT}/package.json ${NODE_FOLDER_PROJECT}/package.json
+if [ -z "$(ls -A ${NODE_FOLDER_PROJECT})" ]; then
 
-  cd ${NODE_FOLDER_PROJECT}
+  export NG_CLI_ANALYTICS=off
+  export NG_CLI_ANALYTICS="false"
+  ng new NAME_PROJECT --routing --defaults --skip-git  --directory ./
 
   if [ -e ${NODE_FOLDER_INIT}/packages_install.list ]
   then
@@ -31,15 +31,6 @@ then
       fi
     done < ${NODE_FOLDER_INIT}/packages_install.list
   fi
-
-  cp ${NODE_FOLDER_PROJECT}/package.json ${NODE_FOLDER_PROJECT}/package.json.example
-
-fi
-
-if [ ! -e ${NODE_FOLDER_PROJECT}/package.json ] && [ -e ${NODE_FOLDER_PROJECT}/package.json.example ]
-then
-
-  cp ${NODE_FOLDER_PROJECT}/package.json.example ${NODE_FOLDER_PROJECT}/package.json
 
 fi
 
