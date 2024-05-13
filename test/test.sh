@@ -1,5 +1,9 @@
 #!/bin/bash
 
+NODE_FOLDER_PROJECT=${0%/*}
+
+NODE_NAME_PROJECT=projectest
+
 if [ -z ${NODE_FOLDER_PROJECT} ]
 then
     NODE_FOLDER_PROJECT=/home/project/www/
@@ -57,3 +61,4 @@ then
 fi
 
 exit 0
+
