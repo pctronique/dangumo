@@ -15,7 +15,7 @@ cron && tail -f ${NODE_FOLDER_LOG}/cron.log &
 
 ${NODE_FOLDER_INIT}/createProject.sh 2>> ${NODE_FOLDER_LOG}/initnodejs.log
 
-#${NODE_FOLDER_INIT}/modifname.sh 2>> ${NODE_FOLDER_LOG}/initnodejs.log
+${NODE_FOLDER_INIT}/modifname.sh 2>> ${NODE_FOLDER_LOG}/initnodejs.log
 
 echo "end create project" >> ${NODE_FOLDER_LOG}/endcreate.log
 

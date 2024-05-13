@@ -15,11 +15,16 @@ then
     NODE_FOLDER_INIT=/var/docker/nodejs/
 fi
 
+if [ -z ${NODE_NAME_PROJECT} ]
+then
+    NODE_NAME_PROJECT=project
+fi
+
 if [ -z "$(ls -A ${NODE_FOLDER_PROJECT})" ]; then
 
   export NG_CLI_ANALYTICS=off
   export NG_CLI_ANALYTICS="false"
-  ng new NAME_PROJECT --routing --defaults --skip-git  --directory ./
+  ng new prgdangumo --routing --defaults --skip-git  --directory ./
 
   if [ -e ${NODE_FOLDER_INIT}/packages_install.list ]
   then
@@ -27,14 +32,14 @@ if [ -z "$(ls -A ${NODE_FOLDER_PROJECT})" ]; then
     do   
       if [ ! -z "$line" ]
       then
-        npm install $line 2&>> ${NODE_FOLDER_LOG}/initnodejs.log
+        npm install $line >> ${NODE_FOLDER_LOG}/initnodejs.log 2>> ${NODE_FOLDER_LOG}/initnodejs.log
       fi
     done < ${NODE_FOLDER_INIT}/packages_install.list
   fi
 
 fi
 
-npm install
+npm install >> ${NODE_FOLDER_LOG}/initnodejs.log 2>> ${NODE_FOLDER_LOG}/initnodejs.log
 
 touch ${NODE_FOLDER_LOG}/error.log
 
