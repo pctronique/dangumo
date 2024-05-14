@@ -9,11 +9,11 @@ ENV NODE_FOLDER_PROJECT="/home/project/www/"
 ENV NODE_FOLDER_LOG="/var/log/docker/nodejs/"
 ENV NODE_FOLDER_TMP="/var/tmp/docker/nodejs/"
 ENV NODE_FOLDER_INIT="/var/docker/nodejs/"
+ENV CRON_FOLDER_INIT="/var/docker/cron/"
 ENV NODE_FOLDER_INIT_DATA="/docker-entrypoint-initdata.d/"
 
 ARG VALUE_NODEJS_VERSION
 ENV DEF_NODEJSX_VERSION=${VALUE_NODEJS_VERSION}
-
 
 ENV DEF_NODEJSPM2_VERSION=${VALUE_NODEJS_VERSION:-"5.3.1"}
 ENV DEF_NODEJSPM2_VERSION=${DEF_NODEJSPM2_VERSION##${DEF_NODEJSX_VERSION}}
@@ -29,8 +29,7 @@ ENV DEF_PM2LR_VERSION=${DEF_NODEJSPM2LR_VERSION:-"${VALUE_PM2ROTATE_VERSION}"}
 ENV PM2LR_VERSION=${DEF_PM2LR_VERSION:+"pm2-logrotate@${DEF_PM2LR_VERSION}"}
 ENV PM2LR_VERSION=${PM2LR_VERSION:-'pm2-logrotate'}
 
-RUN apt-get update &&\ 
-    apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update
 RUN apt-get install -y cron
 RUN apt-get install -y inotify-tools
 #del list
@@ -41,9 +40,7 @@ RUN mkdir -p ${NODE_FOLDER_PROJECT}
 RUN mkdir -p ${NODE_FOLDER_LOG}
 RUN mkdir -p ${NODE_FOLDER_INIT_DATA}
 RUN mkdir -p ${NODE_FOLDER_TMP}
-
-COPY dockercron /etc/cron.d/dockercron
-RUN crontab /etc/cron.d/dockercron
+RUN mkdir -p ${CRON_FOLDER_INIT}
 
 COPY modifname.sh ${NODE_FOLDER_INIT}
 RUN chmod +x ${NODE_FOLDER_INIT}/modifname.sh
@@ -53,13 +50,19 @@ RUN chmod +x ${NODE_FOLDER_INIT}/createProject.sh
 
 COPY packages_install.list ${NODE_FOLDER_INIT}
 COPY package.json ${NODE_FOLDER_INIT}
-#COPY ecosystem.config.js ${NODE_FOLDER_INIT}
 
 COPY importdata.sh ${NODE_FOLDER_INIT}
 RUN chmod +x ${NODE_FOLDER_INIT}/importdata.sh
 
 COPY updateProject.sh ${NODE_FOLDER_INIT}
 RUN chmod +x ${NODE_FOLDER_INIT}/updateProject.sh
+
+COPY dockercron ${CRON_FOLDER_INIT}
+COPY dockercron /etc/cron.d/dockercron
+RUN crontab /etc/cron.d/dockercron
+
+COPY cronauto.sh ${CRON_FOLDER_INIT}
+RUN chmod +x ${CRON_FOLDER_INIT}/cronauto.sh
 
 COPY docker-initnjs-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-initnjs-entrypoint.sh
